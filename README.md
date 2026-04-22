@@ -47,3 +47,4 @@ Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje
 Jeśli napotkasz błędy, masz pomysły na ulepszenia lub chcesz zaproponować nowe funkcje:
 - **Zgłaszanie błędów:** użyj zakładki [Issues](https://github.com/olekdrabina/infocar-scraper/issues), aby zgłaszać błędy lub nieoczekiwane działanie
 - **Propozycje funkcji:** nowe pomysły i sugestie również możesz przesyłać przez zakładkę [Issues](https://github.com/olekdrabina/infocar-scraper/issues)
+- **Współtworzenie:** zrób fork repozytorium, wprowadź zmiany i wyślij pull request

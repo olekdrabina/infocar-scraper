@@ -1,0 +1,13 @@
+venv/
+.venv/
+
+__pycache__/
+*.pyc
+
+.env
+
+dates.txt
+new.txt
+
+.DS_Store
+Thumbs.db
