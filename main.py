@@ -25,6 +25,45 @@ def is_valid_email(email: str) -> bool:
     pattern = r"^[\w\.-]+@[\w\.-]+\.\w{2,}$"
     return re.match(pattern, email) is not None
 
+def validate_env():
+    REQUIRED_KEYS = {
+        "LOGIN": "Login do Infocar",
+        "LOGIN_PASSWORD": "Hasło do Infocar",
+        "PROVINCE": "Województwo",
+        "CENTER": "Ośrodek WORD",
+        "CATEGORY": "Kategoria",
+        "EXAM_TYPE": "Typ egzaminu",
+        "MIN_FREQUENCY": "Częstotliwość pobierania terminów",
+        "DAYS_AHEAD": "Ilość dni wyprzedzenia",
+        "EMAIL": "Gmail (SMTP)",
+        "EMAIL_PASSWORD": "Hasło SMTP",
+    }
+
+    if not os.path.exists(".env"):
+        print("Musisz najpierw uzupełnić dane — wybierz opcję \"1\"")
+        print("")
+        return False
+
+    env_data = {}
+    with open(".env", "r") as f:
+        for line in f:
+            line = line.strip()
+            if "=" in line:
+                k, v = line.split("=", 1)
+                env_data[k] = v.strip('"').strip()
+
+    missing = [label for key, label in REQUIRED_KEYS.items() if not env_data.get(key)]
+
+    if missing:
+        print("\nBrakuje następujących danych:")
+        for field in missing:
+            print(f"   • {field}")
+        print("\nUzupełnij je wybierając opcję \"1\"")
+        print("")
+        return False
+
+    return True
+
 try:
     print("""
 ==================================
@@ -38,23 +77,24 @@ try:
         choice = input()
 
         if choice == "0":
-            subprocess.run([sys.executable, "scraper.py"])
-            break
+            if validate_env():
+                subprocess.run([sys.executable, "scraper.py"])
+                break
 
         elif choice == "1":
             load_dotenv()
 
             FIELDS = {
-                0: ("- Login do Infocar: ", "Podaj login:", "LOGIN", "Brak loginu do infocar"),
-                1: ("- Hasło do Infocar: ", "Podaj hasło:", "LOGIN_PASSWORD", "Brak hasła do infocar"),
-                2: ("- Województwo: ", "Podaj województwo:", "PROVINCE", "Brak województwa"),
-                3: ("- Ośrodek WORD: ", "Podaj ośrodek WORD:", "CENTER", "Brak ośroda WORD"),
-                4: ("- Kategoria: ", "Podaj kategorię:", "CATEGORY", "Brak kategorii"),
-                5: ("- Typ egzaminu: ", "Wybierz typ egzaminu (praktyka / teoria):", "EXAM_TYPE", "Brak typu egzaminu"),
-                6: ("- Częstotliwość pobierania terminów: ", "Podaj częstotliwość w minutach:", "MIN_FREQUENCY", "Brak częstotliwości pobierania terminów"),
-                7: ("- Ilość dni wyprzedzenia terminów: ", "Podaj liczbę dni wyprzedzenia terminów:", "DAYS_AHEAD", "Brak ilości dni wyprzedzania terminów"),
-                8: ("- Gmail (SMTP): ", "Podaj adres Gmail do SMTP:", "EMAIL", "Brak gmaila dla SMTP"),
-                9: ("- Hasło SMTP: ", "Podaj hasło do SMTP:", "EMAIL_PASSWORD", "Brak hasła dla SMTP"),
+                0: ("- Login do Infocar: ", "Podaj login:", "LOGIN", "BRAK LOGINU DO INFOCAR"),
+                1: ("- Hasło do Infocar: ", "Podaj hasło:", "LOGIN_PASSWORD", "BRAK HASŁA DO INFOCAR"),
+                2: ("- Województwo: ", "Podaj województwo:", "PROVINCE", "BRAK WOJEWÓDZTWA"),
+                3: ("- Ośrodek WORD: ", "Podaj ośrodek WORD:", "CENTER", "BRAK OŚRODKA WORD"),
+                4: ("- Kategoria: ", "Podaj kategorię:", "CATEGORY", "BRAK KATEGORII"),
+                5: ("- Typ egzaminu: ", "Wybierz typ egzaminu (praktyka / teoria):", "EXAM_TYPE", "BRAK TYPU EGZAMINU"),
+                6: ("- Częstotliwość pobierania terminów: ", "Podaj częstotliwość w minutach:", "MIN_FREQUENCY", "BRAK CZĘSTOTLIWOŚCI POBIERANIA TERMINÓW"),
+                7: ("- Ilość dni wyprzedzenia terminów: ", "Podaj liczbę dni wyprzedzenia terminów:", "DAYS_AHEAD", "BRAK ILOŚCI DNI WYPRZEDZANIA TERMINÓW"),
+                8: ("- Gmail (SMTP): ", "Podaj adres Gmail do SMTP:", "EMAIL", "BRAK GMAILA DO SMTP"),
+                9: ("- Hasło SMTP: ", "Podaj hasło do SMTP:", "EMAIL_PASSWORD", "BRAK HASŁA DO SMTP"),
             }
             def envPrint(index):
                 return FIELDS.get(index, (None, None, None))
