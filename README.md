@@ -40,6 +40,9 @@ Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje
 5. Zainstaluj wymagane pakiety komendą `pip install -r requirements.txt`
 6. Uruchom aplikacje komendą `python main.py`
 
+> [!TIP]
+> Aby zatrzymać bota naciśnij `CTRL + C`
+
 ## Ostrzeżenie
 > [!CAUTION]
 > - Program powstał w celach edukacyjnych, użytkownik korzysta z niego na własną odpowiedzialność

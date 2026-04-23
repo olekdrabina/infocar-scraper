@@ -106,14 +106,13 @@ try:
                         line = line.strip()
                         if "=" in line:
                             k, v = line.split("=", 1)
-                            env_data[k] = v
+                            env_data[k] = v.strip('"').strip()
 
             print("")
             print("--- Jeśli nie chcesz zmieniać konkretnej informacji naciśnij \"ENTER\" ---")
             for index in range(10):
                 current, prompt, key, missing = envPrint(index)
 
-                print("")
                 if "PASSWORD" in key:
                     display = "*" * 8 if key in env_data else missing
                 else:
@@ -164,6 +163,7 @@ try:
                         new_value = env_data.get(key, "")
                     else:
                         new_value = raw
+                        print("")
                 if new_value != "":
                     env_data[key] = new_value
             with open(".env", "w", encoding="utf-8") as f:
@@ -177,5 +177,4 @@ try:
             print("")
             print("Nieprawidłowy wybór, spróbuj ponownie")
 except KeyboardInterrupt:
-    print("")
-    print("\nZamknięto program")
+    pass
