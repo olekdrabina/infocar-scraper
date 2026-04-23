@@ -43,7 +43,8 @@ while (True):
     is_work_hours = (7 <= now.hour < 16)
     if is_sunday or not is_work_hours:
         print(f"[{now}] poza godzinami pracy (7-16) lub niedziela")
-        time.sleep(60)
+        print(f"Próbowanie ponownie za 5min")
+        time.sleep(300)
         continue
 
     cutoff_date = datetime.today() + timedelta(days=days_ahead)
@@ -55,7 +56,7 @@ while (True):
         time.sleep(random.uniform(min_s, max_s))
 
     print(f"Uruchamianie chromium")
-    driver = uc.Chrome(version_main=149, headless=False)
+    driver = uc.Chrome(version_main=147, headless=False)
     wait = WebDriverWait(driver, 60)
     print("Chromium uruchomione")
 

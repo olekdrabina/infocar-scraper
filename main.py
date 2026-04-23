@@ -40,12 +40,12 @@ def validate_env():
     }
 
     if not os.path.exists(".env"):
-        print("Musisz najpierw uzupełnić dane — wybierz opcję \"1\"")
+        print("Musisz najpierw uzupełnić dane, wybierz opcję \"1\"")
         print("")
         return False
 
     env_data = {}
-    with open(".env", "r") as f:
+    with open(".env", "r", encoding="utf-8", errors="ignore") as f:
         for line in f:
             line = line.strip()
             if "=" in line:
@@ -101,7 +101,7 @@ try:
 
             env_data = {}
             if os.path.exists(".env"):
-                with open(".env", "r") as f:
+                with open(".env", "r", encoding="utf-8", errors="ignore") as f:
                     for line in f:
                         line = line.strip()
                         if "=" in line:
@@ -166,7 +166,7 @@ try:
                         new_value = raw
                 if new_value != "":
                     env_data[key] = new_value
-            with open(".env", "w") as f:
+            with open(".env", "w", encoding="utf-8") as f:
                 for k, v in env_data.items():
                     f.write(f'{k}="{v}"\n')
 
@@ -175,7 +175,7 @@ try:
             break
         else:
             print("")
-            print("Nieprawidłowy wybór, spróbuj ponownie.")
+            print("Nieprawidłowy wybór, spróbuj ponownie")
 except KeyboardInterrupt:
     print("")
-    print("\nZamknięto program.")
+    print("\nZamknięto program")
