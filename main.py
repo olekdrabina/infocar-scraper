@@ -29,16 +29,16 @@ try:
             load_dotenv()
 
             FIELDS = {
-                0: ("- Login do Infocar: ", "Podaj nowy login:", "LOGIN"),
-                1: ("- Hasło do Infocar: ", "Podaj nowe hasło:", "LOGIN_PASSWORD"),
-                2: ("- Województwo: ", "Podaj nowe województwo:", "PROVINCE"),
-                3: ("- Ośrodek WORD: ", "Podaj nowy ośrodek WORD:", "CENTER"),
-                4: ("- Kategoria: ", "Podaj nową kategorię:", "CATEGORY"),
-                5: ("- Typ egzaminu: ", "Wybierz typ egzaminu (praktyka / teoria):", "EXAM_TYPE"),
-                6: ("- Częstotliwość pobierania terminów: ", "Podaj częstotliwość w minutach:", "MIN_FREQUENCY"),
-                7: ("- Wyprzedzenie powiadomień: ", "Podaj liczbę dni wyprzedzenia:", "DAYS_AHEAD"),
-                8: ("- Gmail (SMTP): ", "Podaj adres Gmail używany do SMTP:", "EMAIL"),
-                9: ("- Hasło SMTP: ", "Podaj hasło SMTP:", "EMAIL_PASSWORD"),
+                0: ("- Login do Infocar: ", "Podaj nowy login:", "LOGIN", "Brak loginu do infocar"),
+                1: ("- Hasło do Infocar: ", "Podaj nowe hasło:", "LOGIN_PASSWORD", "Brak hasła do infocar"),
+                2: ("- Województwo: ", "Podaj nowe województwo:", "PROVINCE", "Brak województwa"),
+                3: ("- Ośrodek WORD: ", "Podaj nowy ośrodek WORD:", "CENTER", "Brak ośroda WORD"),
+                4: ("- Kategoria: ", "Podaj nową kategorię:", "CATEGORY", "Brak kategorii"),
+                5: ("- Typ egzaminu: ", "Wybierz typ egzaminu (praktyka / teoria):", "EXAM_TYPE", "Brak typu egzaminu"),
+                6: ("- Częstotliwość pobierania terminów: ", "Podaj częstotliwość w minutach:", "MIN_FREQUENCY", "Brak częstotliwości pobierania terminów"),
+                7: ("- Ilość dni wyprzedzenia terminów: ", "Podaj liczbę dni wyprzedzenia terminów:", "DAYS_AHEAD", "Brak ilości dni wyprzedzania terminów"),
+                8: ("- Gmail (SMTP): ", "Podaj adres Gmail używany do SMTP:", "EMAIL", "Brak gmaila dla SMTP"),
+                9: ("- Hasło SMTP: ", "Podaj hasło SMTP:", "EMAIL_PASSWORD", "Brak hasła dla SMTP"),
             }
             def envPrint(index):
                 return FIELDS.get(index, (None, None, None))
@@ -55,13 +55,13 @@ try:
             print("")
             print("--- Jeśli nie chcesz zmieniać konkretnej informacji naciśnij \"ENTER\" ---")
             for index in range(10):
-                current, prompt, key = envPrint(index)
+                current, prompt, key, missing = envPrint(index)
 
                 print("")
                 if "PASSWORD" in key:
-                    display = "*" * 8
+                    display = "*" * 8 if key in env_data else missing
                 else:
-                    display = os.getenv(key)
+                    display = env_data.get(key) or missing
                 print(current + display)
 
                 print(prompt)

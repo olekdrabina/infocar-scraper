@@ -31,12 +31,14 @@ Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje
 ### Aplikacja
 1. Pobierz pliki z tego repozytorium
 2. Otwórz folder z plikami w terminalu
-3. Utwórz środowisko komendą `python3 -m venv venv`
+3. Utwórz środowisko komendą:
+    - Windows - `python -m venv venv`
+    - Linux / MacOS - `python3 -m venv venv`
 4. Aktywuj środowisko komendą:
-   - Linux / MacOS - `source venv/bin/activate`
-   - Windows - `venv\Scripts\activate`
+    - Windows - `venv\Scripts\activate`
+    - Linux / MacOS - `source venv/bin/activate`
 5. Zainstaluj wymagane pakiety komendą `pip install -r requirements.txt`
-6. Uruchom aplikacje komendą `python3 main.py`
+6. Uruchom aplikacje komendą `python main.py`
 
 ## Ostrzeżenie
 > [!CAUTION]
