@@ -14,7 +14,6 @@ import os
 
 # date
 days_ahead = int(os.getenv("DAYS_AHEAD"))
-
 def parse_date(date_str):
     parts = date_str.strip().split(" ")
     date_part = parts[-1]
@@ -24,6 +23,19 @@ def parse_date(date_str):
     month = int(nums[1])
     year = int(nums[2]) if len(nums) > 2 else datetime.today().year
     return datetime(year, month, day)
+
+# exam type
+exam_type = os.getenv("EXAM_TYPE")
+FILES = {
+    "praktyka": {
+        "dates": "dates-practice.txt",
+        "new": "new-practice.txt"
+    },
+    "teoria": {
+        "dates": "dates-theoretical.txt",
+        "new": "new-theoretical.txt"
+    }
+}
 
 while (True):
     now = datetime.now()
@@ -92,32 +104,32 @@ while (True):
     # province
     province_env = os.getenv("PROVINCE")
     print(f"Wybieranie województwa: {province_env}")
-    provinceInput = wait.until(EC.presence_of_element_located((By.ID, "province")))
+    province_input = wait.until(EC.presence_of_element_located((By.ID, "province")))
     try:
         wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "cdk-overlay-backdrop")))
     except:
         pass
-    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", provinceInput)
+    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", province_input)
     human_delay()
-    driver.execute_script("arguments[0].click();", provinceInput)
+    driver.execute_script("arguments[0].click();", province_input)
 
-    provinceSelected = wait.until(EC.element_to_be_clickable((By.XPATH, f"//li[normalize-space(text())='{province_env}']")))
+    province_selected = wait.until(EC.element_to_be_clickable((By.XPATH, f"//li[normalize-space(text())='{province_env}']")))
     human_delay()
-    driver.execute_script("arguments[0].click();", provinceSelected)
+    driver.execute_script("arguments[0].click();", province_selected)
     human_delay()
 
     # center
     center_env = os.getenv("CENTER")
     print(f"Wybieranie ośrodka WORD: {center_env}")
     wait.until(lambda d: d.find_element(By.ID, "organization").is_enabled())
-    centerInput = driver.find_element(By.ID, "organization")
-    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", centerInput)
+    center_input = driver.find_element(By.ID, "organization")
+    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", center_input)
     human_delay()
-    driver.execute_script("arguments[0].click();", centerInput)
+    driver.execute_script("arguments[0].click();", center_input)
 
-    centerSelected = wait.until(EC.element_to_be_clickable((By.XPATH, f"//li[contains(text(), '{center_env}')]")))
+    center_selected = wait.until(EC.element_to_be_clickable((By.XPATH, f"//li[contains(text(), '{center_env}')]")))
     human_delay()
-    driver.execute_script("arguments[0].click();", centerSelected)
+    driver.execute_script("arguments[0].click();", center_selected)
     human_delay()
 
     # category
@@ -144,11 +156,15 @@ while (True):
     ActionChains(driver).move_to_element(btn_next).click().perform()
 
     # exam type
-    print(f"Wybieranie typ egzaminu: {os.getenv('EXAM_TYPE')}")
-    practice = wait.until(EC.presence_of_element_located((By.XPATH, "//*[@id='practical-container']/input")))
-    driver.execute_script("arguments[0].scrollIntoView(true);", practice)
+    exam_type_env = os.getenv("EXAM_TYPE")
+    print(f"Wybieranie typ egzaminu: {exam_type_env}")
+    if (exam_type_env == "praktyka"):
+        exam_type_input = wait.until(EC.presence_of_element_located((By.XPATH, "//*[@id='practical-container']/input")))
+    elif (exam_type_env == "teoria"):
+        exam_type_input = wait.until(EC.presence_of_element_located((By.XPATH, "//*[@id='theoretical-container']/input")))
+    driver.execute_script("arguments[0].scrollIntoView(true);", exam_type_input)
     human_delay()
-    driver.execute_script("arguments[0].click();", practice)
+    driver.execute_script("arguments[0].click();", exam_type_input)
     human_delay()
 
     # dates
@@ -205,42 +221,38 @@ while (True):
 
                 info_text = " ".join(info_text.split())
 
-                current_entries.append(
-                    f"{date_text} | {time_text} | {info_text}"
-                )
-
+                current_entries.append(f"{date_text} | {time_text} | {info_text}")
         print(f"Nowych terminów: {len(current_entries)}")
 
         old_entries = []
         try:
-            with open("dates.txt", "r", encoding="utf-8") as f:
+            with open(FILES[exam_type]["dates"], "r", encoding="utf-8") as f:
                 old_entries = [line.strip() for line in f if line.strip()]
         except FileNotFoundError:
             pass
 
         new_entries = [e for e in current_entries if e not in old_entries]
-
         if new_entries:
             print("====================")
-            print(f"!!! {len(new_entries)} NOWE TERMINY ZNALEZIONO !!!")
+            print(f"!!! NOWE TERMINY ZNALEZIONO ({len(new_entries)}) !!!")
             print("====================")
 
             send_email(
-                subject="NOWE TERMINY INFO-CAR!!!",
+                subject=f'NOWE TERMINY "{os.getenv("EXAM_TYPE")}" INFO-CAR!!!',
                 body="\n".join(new_entries)
             )
 
-            with open("new.txt", "w", encoding="utf-8") as f:
+            with open(FILES[exam_type]["new"], "w", encoding="utf-8") as f:
                 f.write("\n".join(new_entries))
         else:
-            print("-----------")
+            print("====================")
             print("brak nowych terminów")
-            print("-----------")
+            print("====================")
 
-            with open("new.txt", "w", encoding="utf-8") as f:
+            with open(FILES[exam_type]["new"], "w", encoding="utf-8") as f:
                 pass
 
-        with open("dates.txt", "w", encoding="utf-8") as f:
+        with open(FILES[exam_type]["dates"], "w", encoding="utf-8") as f:
             f.write("\n".join(current_entries))
 
     finally:

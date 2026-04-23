@@ -6,8 +6,10 @@ __pycache__/
 
 .env
 
-dates.txt
-new.txt
+dates-practice.txt
+dates-theoretical.txt
+new-practice.txt
+new-theoretical.txt
 
 .DS_Store
 Thumbs.db
