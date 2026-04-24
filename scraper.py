@@ -66,7 +66,7 @@ try:
             time.sleep(random.uniform(min_s, max_s))
 
         print(f"Uruchamianie chromium")
-        driver = uc.Chrome(version_main=147, headless=False)
+        driver = uc.Chrome(headless=False)
         wait = WebDriverWait(driver, 60)
         print("Chromium uruchomione")
 
