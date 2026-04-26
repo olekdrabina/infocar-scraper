@@ -1,7 +1,7 @@
 # info-car.pl scraper
 Automatyczny scraper do wyszukiwania dostępnych terminów egzaminów na prawo jazdy na stronie **info-car.pl**
 
-Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje rezerwację albo WORD udostępni nowe miejsca. Zdarza się, że znikają w ciągu kilku minut. Ten bot pomoże ci ich nie przegapić, automatycznie wysyłając powiadomienie e-mail jeśli pojawi się nowy termin
+Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje rezerwację albo WORD udostępni nowe miejscam, często znikają w ciągu kilku minutaa a ten bot pomoże ci ich nie przegapić, automatycznie wysyłając powiadomienie e-mail jeśli pojawi się nowy termin
 
 > [!TIP]
 > Zalecam korzystać z konta innego niż główne, aby zminimalizować ryzyko ewentualnej blokady konta oficjalnego
@@ -42,6 +42,11 @@ Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje
 
 > [!TIP]
 > Aby zatrzymać bota naciśnij `CTRL + C`
+
+> [!IMPORTANT]
+> Aby uruchomić ponownie bota należy:
+> - Jeśli terminal nadal jest otwarty wystarczy ponownie uruchom aplikację (krok 6)
+> - Jeśli terminal został zamknięty najpierw aktywuj środowisko (krok 4), a następnie uruchom aplikację (krok 6)
 
 ## Ostrzeżenie
 > [!CAUTION]

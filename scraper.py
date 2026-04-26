@@ -51,9 +51,9 @@ try:
                 candidate += timedelta(days=1)
 
             secs = (candidate - now).total_seconds()
-            h, m = int(secs) // 3600, (int(secs) % 3600) // 60
+            hrs, mins = int(secs) // 3600, (int(secs) % 3600) // 60
             print(f"[{now}] poza godzinami pracy (7-16) lub niedziela")
-            print(f"Następna próba o {candidate.strftime('%Y-%m-%d 07:00')} (za {h}h {m}min)")
+            print(f"Następna próba o {candidate.strftime('%Y-%m-%d 07:00')} (za {hrs}h {mins}min)")
             time.sleep(secs)
             continue
 
@@ -67,7 +67,7 @@ try:
 
         print(f"Uruchamianie chromium")
         driver = uc.Chrome(headless=False)
-        wait = WebDriverWait(driver, 60)
+        wait = WebDriverWait(driver, 30)
         print("Chromium uruchomione")
 
         human_delay()
