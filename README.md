@@ -1,7 +1,7 @@
 # info-car.pl scraper
 Automatyczny scraper do wyszukiwania dostępnych terminów egzaminów na prawo jazdy na stronie **info-car.pl**
 
-Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje rezerwację albo WORD udostępni nowe miejscam, często znikają w ciągu kilku minutaa a ten bot pomoże ci ich nie przegapić, automatycznie wysyłając powiadomienie e-mail jeśli pojawi się nowy termin
+Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje rezerwację albo WORD udostępni nowe miejsca, często znikają w ciągu kilku minut a ten bot pomoże ci ich nie przegapić, automatycznie wysyłając powiadomienie e-mail jeśli pojawi się nowy termin
 
 > [!TIP]
 > Zalecam korzystać z konta innego niż główne, aby zminimalizować ryzyko ewentualnej blokady konta oficjalnego
@@ -17,18 +17,18 @@ Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje
 > Działa w godzinach 7:00–16:00, z pominięciem niedziel
 
 ## Instalacja
-### Wymagania
+### Wymagania:
 - [Python 3.10+](https://www.python.org/downloads/)
 - Chrome / Chromium
 - Konto w info-car.pl
 - Konto Gmail SMTP (poradnik poniżej)
-### Konto Gmail SMTP
+### Konto Gmail SMTP:
 1. Wejdź na https://myaccount.google.com/apppasswords
 2. Wpisz nazwe aplikacji (np. infocar-scraper)
 3. Kliknij „Utwórz”
 4. Skopiuj wygenerowane hasło (16 znaków)
 5. Wklej w terminalu po włączeniu aplikacji
-### Uruchamianie aplikacji
+### Uruchamianie aplikacji:
 #### Windows
 1. Pobierz pliki z tego repozytorium  
 2. Otwórz folder z plikami  
