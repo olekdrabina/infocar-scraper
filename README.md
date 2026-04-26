@@ -28,25 +28,27 @@ Terminy egzaminów często pojawiają się nagle, na przykład gdy ktoś anuluje
 3. Kliknij „Utwórz”
 4. Skopiuj wygenerowane hasło (16 znaków)
 5. Wklej w terminalu po włączeniu aplikacji
-### Aplikacja
-1. Pobierz pliki z tego repozytorium
-2. Otwórz folder z plikami w terminalu
-3. Utwórz środowisko komendą:
-    - Windows - `python -m venv venv`
-    - Linux / MacOS - `python3 -m venv venv`
-4. Aktywuj środowisko komendą:
-    - Windows - `venv\Scripts\activate`
-    - Linux / MacOS - `source venv/bin/activate`
-5. Zainstaluj wymagane pakiety komendą `pip install -r requirements.txt`
-6. Uruchom aplikacje komendą `python main.py`
+### Uruchamianie aplikacji
+#### Windows
+1. Pobierz pliki z tego repozytorium  
+2. Otwórz folder z plikami  
+3. Uruchom aplikację, klikając dwukrotnie plik `windows.bat`  
+
+#### Linux / MacOS
+1. Pobierz pliki z tego repozytorium  
+2. Otwórz folder z plikami **w terminalu ** 
+3. Nadaj uprawnienia do uruchamiania komendą:
+   ```bash
+   chmod +x linux.sh
+4. Uruchom aplikację komendą:
+   ```bash
+   ./linux.sh
+
+> [!IMPORTANT]
+> W systemach Linux / macOS punkt 3. należy wykonać tylko raz
 
 > [!TIP]
 > Aby zatrzymać bota naciśnij `CTRL + C`
-
-> [!IMPORTANT]
-> Aby uruchomić ponownie bota należy:
-> - Jeśli terminal nadal jest otwarty wystarczy ponownie uruchom aplikację (krok 6)
-> - Jeśli terminal został zamknięty najpierw aktywuj środowisko (krok 4), a następnie uruchom aplikację (krok 6)
 
 ## Ostrzeżenie
 > [!CAUTION]
