@@ -170,7 +170,7 @@ try:
                 for k, v in env_data.items():
                     f.write(f'{k}="{v}"\n')
 
-            print("--- Zapisano nowe dane ---")
+            print("--- Zapisano nowe dane, uruchamianie scrapera ---")
             subprocess.run([sys.executable, "scraper.py"])
             break
         else:

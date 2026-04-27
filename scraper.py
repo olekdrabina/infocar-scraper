@@ -53,7 +53,7 @@ try:
             secs = (candidate - now).total_seconds()
             hrs, mins = int(secs) // 3600, (int(secs) % 3600) // 60
             print("")
-            print(f"[{now}] poza godzinami pracy (7-16) lub niedziela")
+            print(f"[{now.strftime('%Y-%m-%d %H:%M:%S')}] poza godzinami pracy (07:00-16:00) lub niedziela")
             print(f"Następna próba o {candidate.strftime('%Y-%m-%d 07:00')} (za {hrs}h {mins}min)")
             time.sleep(secs)
             continue
@@ -67,7 +67,7 @@ try:
             time.sleep(random.uniform(min_s, max_s))
 
         print(f"Uruchamianie chromium")
-        driver = uc.Chrome(headless=False)
+        driver = uc.Chrome(driver_main=147, headless=False)
         wait = WebDriverWait(driver, 30)
         print("Chromium uruchomione")
 
